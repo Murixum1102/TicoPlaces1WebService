@@ -7,5 +7,7 @@ import com.ulatina.ticoplaces.webservice.model.entity.Province;
 public interface IProvinceService {
 	
 	public List<Province> findAll();
+	
+	public Province findById(Long id);
 
 }

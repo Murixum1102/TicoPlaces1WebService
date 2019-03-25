@@ -22,4 +22,11 @@ public class ProvinceServiceImpl implements IProvinceService{
 		return (List<Province>)provinceDao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public Province findById(Long id) {
+		
+		return provinceDao.findById(id).orElse(null);
+	}
+
 }
