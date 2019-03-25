@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="tbl_province")
@@ -33,6 +35,7 @@ public class Province implements Serializable{
 	private String provinceName;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="province", cascade=CascadeType.ALL)
+	@JsonManagedReference
 	private List<Canton> cantones;
 	
 	
