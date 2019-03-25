@@ -22,4 +22,11 @@ public class CantonServiceImpl implements ICantonService{
 		return (List<Canton>)cantonDao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public Canton findById(Long id) {
+		
+		return cantonDao.findById(id).orElse(null);
+	}
+
 }

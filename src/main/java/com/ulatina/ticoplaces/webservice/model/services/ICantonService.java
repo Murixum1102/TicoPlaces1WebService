@@ -7,4 +7,6 @@ import com.ulatina.ticoplaces.webservice.model.entity.Canton;
 public interface ICantonService {
 
 	public List<Canton> findAll();
+	
+	public Canton findById(Long id);
 }

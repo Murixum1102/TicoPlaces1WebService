@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class CantonRestController {
 	public List<Canton> index(){
 		
 		return cantonService.findAll();
+	}
+	
+	@GetMapping("cantones/{id}")
+	public Canton show(@PathVariable Long id) {
+		return cantonService.findById(id);
 	}
 }
