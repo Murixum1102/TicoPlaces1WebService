@@ -43,8 +43,14 @@ public class Canton implements Serializable{
 	@JsonManagedReference
 	private List<District> districts;
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="canton", cascade=CascadeType.ALL)
+	@JsonManagedReference
+	private List<Place> places;
+	
+	
 	public Canton() {
 		this.districts = new ArrayList<>();
+		this.places = new ArrayList<>();
 	}
 	
 	public List<District> getDistricts() {

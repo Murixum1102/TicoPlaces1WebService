@@ -38,6 +38,10 @@ public class Province implements Serializable{
 	@JsonManagedReference
 	private List<Canton> cantones;
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="provincia", cascade=CascadeType.ALL)
+	@JsonManagedReference
+	private List<Place> place;
+	
 	
 	
 	public Province() {
