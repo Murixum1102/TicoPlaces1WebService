@@ -38,10 +38,6 @@ public class Place implements Serializable{
 	@Column(name="Latitud")
 	private String latitude;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="TBL_Category_id_Category")
-	@JsonBackReference
-	private Category categoria;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="Province_id_Province")

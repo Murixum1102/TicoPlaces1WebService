@@ -41,7 +41,7 @@ public class District implements Serializable{
 	@JsonBackReference
 	private Canton canton;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="district", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="distrito", cascade=CascadeType.ALL)
 	@JsonManagedReference
 	private List<Place> place;
 
