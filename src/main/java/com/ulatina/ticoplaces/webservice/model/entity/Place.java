@@ -58,4 +58,77 @@ public class Place implements Serializable{
 	@JoinColumn(name="TBL_Category_id_Category")
 	@JsonBackReference
 	private Category category;
+
+	
+	
+	public Place() {
+		
+		
+	}
+
+	public Long getIdPlace() {
+		return idPlace;
+	}
+
+	public void setIdPlace(Long idPlace) {
+		this.idPlace = idPlace;
+	}
+
+	public String getPlaceName() {
+		return placeName;
+	}
+
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public Province getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Province provincia) {
+		this.provincia = provincia;
+	}
+
+	public Canton getCantonPlace() {
+		return cantonPlace;
+	}
+
+	public void setCantonPlace(Canton cantonPlace) {
+		this.cantonPlace = cantonPlace;
+	}
+
+	public District getDistrito() {
+		return distrito;
+	}
+
+	public void setDistrito(District distrito) {
+		this.distrito = distrito;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
 }

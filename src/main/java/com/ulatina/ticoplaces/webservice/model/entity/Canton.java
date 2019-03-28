@@ -53,6 +53,14 @@ public class Canton implements Serializable{
 		this.places = new ArrayList<>();
 	}
 	
+	public List<Place> getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(List<Place> places) {
+		this.places = places;
+	}
+
 	public List<District> getDistricts() {
 		return districts;
 	}

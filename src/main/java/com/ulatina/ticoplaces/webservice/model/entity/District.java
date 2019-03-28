@@ -50,7 +50,7 @@ public class District implements Serializable{
 	public District() {
 		this.place = new ArrayList<>();
 	}
-
+	
 	public List<Place> getPlace() {
 		return place;
 	}

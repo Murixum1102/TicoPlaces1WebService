@@ -43,7 +43,7 @@ public class Category implements Serializable{
 		this.places = new ArrayList<>();
 		
 	}
-
+	
 	public Long getIdCategory() {
 		return idCategory;
 	}
