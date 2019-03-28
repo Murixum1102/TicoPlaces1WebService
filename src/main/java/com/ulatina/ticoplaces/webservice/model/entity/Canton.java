@@ -43,7 +43,7 @@ public class Canton implements Serializable{
 	@JsonManagedReference
 	private List<District> districts;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="canton", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="cantonPlace", cascade=CascadeType.ALL)
 	@JsonManagedReference
 	private List<Place> places;
 	

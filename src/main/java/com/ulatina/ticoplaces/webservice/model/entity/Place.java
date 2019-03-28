@@ -47,7 +47,7 @@ public class Place implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TBL_Canton_id_Canton")
 	@JsonBackReference
-	private Canton canton;
+	private Canton cantonPlace;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="District_id_District")
