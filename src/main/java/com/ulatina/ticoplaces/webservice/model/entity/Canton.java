@@ -47,7 +47,7 @@ public class Canton implements Serializable{
 	@JsonManagedReference
 	private List<Place> places;
 	
-	
+		
 	public Canton() {
 		this.districts = new ArrayList<>();
 		this.places = new ArrayList<>();

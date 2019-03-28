@@ -42,7 +42,10 @@ public class Province implements Serializable{
 	@JsonManagedReference
 	private List<Place> place;
 	
-	
+	public Province() {
+		this.cantones = new ArrayList<>();
+		this.place = new ArrayList<>();
+	}
 	
 	public List<Place> getPlace() {
 		return place;
@@ -50,10 +53,7 @@ public class Province implements Serializable{
 	public void setPlace(List<Place> place) {
 		this.place = place;
 	}
-	public Province() {
-		this.cantones = new ArrayList<>();
-		this.place = new ArrayList<>();
-	}
+	
 	public List<Canton> getCantones() {
 		return cantones;
 	}
