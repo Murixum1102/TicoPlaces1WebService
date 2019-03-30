@@ -30,12 +30,14 @@ public class CantonServiceImpl implements ICantonService{
 	}
 
 	@Override
+	@Transactional
 	public Canton save(Canton canton) {
 		
 		return cantonDao.save(canton);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		
 		cantonDao.deleteById(id);

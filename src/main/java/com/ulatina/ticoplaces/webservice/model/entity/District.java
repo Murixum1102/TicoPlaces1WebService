@@ -34,7 +34,7 @@ public class District implements Serializable{
 	private Long id;
 	
 	@Column(name="Name")
-	private String cantonName;
+	private String districtName;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TBL_Canton_id_Canton")
@@ -68,12 +68,12 @@ public class District implements Serializable{
 		this.id = id;
 	}
 
-	public String getCantonName() {
-		return cantonName;
+	public String getDistrictName() {
+		return districtName;
 	}
 
-	public void setCantonName(String cantonName) {
-		this.cantonName = cantonName;
+	public void setDistrictName(String cantonName) {
+		this.districtName = cantonName;
 	}
 
 	public Canton getCanton() {
