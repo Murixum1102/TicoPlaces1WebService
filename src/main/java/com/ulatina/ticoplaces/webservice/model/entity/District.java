@@ -41,14 +41,15 @@ public class District implements Serializable{
 	@JsonBackReference
 	private Canton canton;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="distrito", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="District_id_District")
 	@JsonManagedReference
 	private List<Place> place;
 
 	
 	
 	public District() {
-		this.place = new ArrayList<>();
+		place = new ArrayList<>();
 	}
 	
 	public List<Place> getPlace() {

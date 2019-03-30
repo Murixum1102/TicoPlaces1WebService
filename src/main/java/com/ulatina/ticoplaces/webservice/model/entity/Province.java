@@ -43,8 +43,8 @@ public class Province implements Serializable{
 	private List<Place> place;
 	
 	public Province() {
-		this.cantones = new ArrayList<>();
-		this.place = new ArrayList<>();
+		cantones = new ArrayList<>();
+		place = new ArrayList<>();
 	}
 	
 	public List<Place> getPlace() {
