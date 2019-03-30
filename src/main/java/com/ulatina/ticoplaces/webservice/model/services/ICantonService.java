@@ -9,4 +9,8 @@ public interface ICantonService {
 	public List<Canton> findAll();
 	
 	public Canton findById(Long id);
+	
+	public Canton save(Canton canton);
+	
+	public void delete(Long id);
 }

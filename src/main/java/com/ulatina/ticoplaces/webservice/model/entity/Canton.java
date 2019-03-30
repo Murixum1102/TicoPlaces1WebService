@@ -39,6 +39,7 @@ public class Canton implements Serializable{
 	@JsonBackReference
 	private Province province;
 	
+	//un caonton tiene una lista de distritos
 	//@OneToMany(fetch=FetchType.LAZY, mappedBy="canton", cascade=CascadeType.ALL)
 	//@JsonManagedReference
 	//private List<District> districts;

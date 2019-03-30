@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ulatina.ticoplaces.webservice.model.entity.Category;
-import com.ulatina.ticoplaces.webservice.model.entity.Place;
 import com.ulatina.ticoplaces.webservice.model.services.ICategoryService;
-import com.ulatina.ticoplaces.webservice.model.services.IPlaceService;
 
 @RestController
 @RequestMapping("/api")

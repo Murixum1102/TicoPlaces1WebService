@@ -29,4 +29,18 @@ public class PlaceServiceImpl implements IPlaceService{
 		return placeDao.findById(id).orElse(null);
 	}
 
+	@Override
+	@Transactional
+	public Place save(Place place) {
+		
+		return placeDao.save(place);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		
+		placeDao.deleteById(id);
+	}
+
 }

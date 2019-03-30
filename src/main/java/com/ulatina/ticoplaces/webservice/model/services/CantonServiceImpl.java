@@ -29,4 +29,16 @@ public class CantonServiceImpl implements ICantonService{
 		return cantonDao.findById(id).orElse(null);
 	}
 
+	@Override
+	public Canton save(Canton canton) {
+		
+		return cantonDao.save(canton);
+	}
+
+	@Override
+	public void delete(Long id) {
+		
+		cantonDao.deleteById(id);
+	}
+
 }

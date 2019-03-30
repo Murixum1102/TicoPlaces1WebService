@@ -29,4 +29,18 @@ public class ProvinceServiceImpl implements IProvinceService{
 		return provinceDao.findById(id).orElse(null);
 	}
 
+	@Override
+	@Transactional
+	public Province save(Province province) {
+		
+		return provinceDao.save(province);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		
+		provinceDao.deleteById(id);
+	}
+
 }
