@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -34,18 +35,17 @@ public class Province implements Serializable{
 	@Column(name="Name_Province")
 	private String provinceName;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="province", cascade=CascadeType.ALL)
-	@JsonManagedReference
+	/*@OneToMany(fetch=FetchType.LAZY, mappedBy="province", cascade=CascadeType.ALL)
+	//@JsonManagedReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Canton> cantones;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="provincia", cascade=CascadeType.ALL)
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Place> place;
 	
-	public Province() {
-		cantones = new ArrayList<>();
-		place = new ArrayList<>();
-	}
+	
 	
 	public List<Place> getPlace() {
 		return place;
@@ -53,13 +53,16 @@ public class Province implements Serializable{
 	public void setPlace(List<Place> place) {
 		this.place = place;
 	}
-	
+	public Province() {
+		this.cantones = new ArrayList<>();
+		this.place = new ArrayList<>();
+	}
 	public List<Canton> getCantones() {
 		return cantones;
 	}
 	public void setCantones(List<Canton> cantones) {
 		this.cantones = cantones;
-	}
+	}*/
 	
 	
 	public Long getId() {

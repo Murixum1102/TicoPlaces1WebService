@@ -29,18 +29,4 @@ public class CategoryServiceImpl implements ICategoryService{
 		return categoryDao.findById(id).orElse(null);
 	}
 
-	@Override
-	@Transactional
-	public Category save(Category category) {
-		
-		return categoryDao.save(category);
-	}
-
-	@Override
-	@Transactional
-	public void delete(Long id) {
-		categoryDao.deleteById(id);
-		
-	}
-
 }

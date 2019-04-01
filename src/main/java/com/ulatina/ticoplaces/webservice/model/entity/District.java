@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -34,22 +35,23 @@ public class District implements Serializable{
 	private Long id;
 	
 	@Column(name="Name")
-	private String districtName;
+	private String cantonName;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TBL_Canton_id_Canton")
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Canton canton;
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="District_id_District")
-	@JsonManagedReference
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="distrito", cascade=CascadeType.ALL)
+	//@JsonManagedReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Place> place;
 
 	
 	
 	public District() {
-		place = new ArrayList<>();
+		this.place = new ArrayList<>();
 	}
 	
 	public List<Place> getPlace() {
@@ -68,12 +70,12 @@ public class District implements Serializable{
 		this.id = id;
 	}
 
-	public String getDistrictName() {
-		return districtName;
+	public String getCantonName() {
+		return cantonName;
 	}
 
-	public void setDistrictName(String cantonName) {
-		this.districtName = cantonName;
+	public void setCantonName(String cantonName) {
+		this.cantonName = cantonName;
 	}
 
 	public Canton getCanton() {

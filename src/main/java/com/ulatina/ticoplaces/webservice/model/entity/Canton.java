@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -32,29 +33,33 @@ public class Canton implements Serializable{
 	@Column(name="id_Canton")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name="Name")
 	private String name;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="TBL_Province_id_Province")
-	@JsonBackReference
+	@JoinColumn(name="id_Province")
+	//@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Province province;
 	
-	//un caonton tiene una lista de distritos
-	//@OneToMany(fetch=FetchType.LAZY, mappedBy="canton", cascade=CascadeType.ALL)
+	/*@OneToMany(fetch=FetchType.LAZY, mappedBy="canton", cascade=CascadeType.ALL)
 	//@JsonManagedReference
-	//private List<District> districts;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<District> districts;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="cantonPlace", cascade=CascadeType.ALL)
-	@JsonManagedReference
-	private List<Place> places;
+	//@JsonManagedReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<Place> places;*/
 	
-		
+	
 	public Canton() {
-		//districts = new ArrayList<>();
-		places = new ArrayList<>();
+		//this.districts = new ArrayList<>();
+		//this.places = new ArrayList<>();
 	}
 	
-	public List<Place> getPlaces() {
+	/*public List<Place> getPlaces() {
 		return places;
 	}
 
@@ -62,7 +67,7 @@ public class Canton implements Serializable{
 		this.places = places;
 	}
 
-	/*public List<District> getDistricts() {
+	public List<District> getDistricts() {
 		return districts;
 	}
 	public void setDistricts(List<District> districts) {
