@@ -38,7 +38,7 @@ public class Canton implements Serializable{
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_Province")
+	@JoinColumn(name="TBL_Province_id_Province")
 	//@JsonBackReference
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Province province;

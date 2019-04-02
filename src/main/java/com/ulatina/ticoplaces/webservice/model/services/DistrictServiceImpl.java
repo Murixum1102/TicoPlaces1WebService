@@ -30,5 +30,15 @@ public class DistrictServiceImpl implements IDistrictService{
 			return districtDao.findById(id).orElse(null);
 		}
 
+		@Override
+		public District save(District district) {
+			return districtDao.save(district);
+		}
+
+		@Override
+		public void delete(Long id) {
+			districtDao.deleteById(id);
+		}
+
 	
 }

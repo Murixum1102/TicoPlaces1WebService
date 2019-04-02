@@ -52,12 +52,12 @@ public class Province implements Serializable{
 	}
 	public void setPlace(List<Place> place) {
 		this.place = place;
-	}
+	}*/
 	public Province() {
-		this.cantones = new ArrayList<>();
-		this.place = new ArrayList<>();
+		//this.cantones = new ArrayList<>();
+		//this.place = new ArrayList<>();
 	}
-	public List<Canton> getCantones() {
+	/*public List<Canton> getCantones() {
 		return cantones;
 	}
 	public void setCantones(List<Canton> cantones) {

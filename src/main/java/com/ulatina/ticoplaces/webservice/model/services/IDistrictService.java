@@ -10,4 +10,8 @@ public interface IDistrictService {
 	public List<District> findAll();
 
 	public District findById(Long id);
+
+	public District save(District district);
+
+	public void delete(Long id);
 }
