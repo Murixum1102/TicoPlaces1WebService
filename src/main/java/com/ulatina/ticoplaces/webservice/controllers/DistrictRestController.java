@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ulatina.ticoplaces.webservice.model.entity.Canton;
 import com.ulatina.ticoplaces.webservice.model.entity.District;
 import com.ulatina.ticoplaces.webservice.model.entity.Province;
 import com.ulatina.ticoplaces.webservice.model.services.IDistrictService;
@@ -53,5 +54,10 @@ public class DistrictRestController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		districtService.delete(id);
+	}
+	@GetMapping("/districts/cantones")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Canton> findAllCantons() {
+		return districtService.findAllCantons();
 	}
 }

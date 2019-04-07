@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tbl_place")
@@ -41,22 +42,22 @@ public class Place implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="Province_id_Province")
-	@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Province provincia;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TBL_Canton_id_Canton")
-	@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Canton cantonPlace;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="District_id_District")
-	@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private District distrito;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TBL_Category_id_Category")
-	@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Category category;
 
 	

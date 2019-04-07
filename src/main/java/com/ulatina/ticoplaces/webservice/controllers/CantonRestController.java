@@ -55,4 +55,10 @@ public Canton update (@RequestBody Canton canton, @PathVariable Long id) {
 public void delete(@PathVariable Long id) {
 	cantonService.delete(id);
 }
+@GetMapping("/cantones/provincias")
+@ResponseStatus(HttpStatus.OK)
+public List<Province> findAllProvinces() {
+	return cantonService.findAllProvinces();
+}
+
 }

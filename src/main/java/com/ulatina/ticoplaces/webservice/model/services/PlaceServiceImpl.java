@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ulatina.ticoplaces.webservice.model.dao.IPlaceDao;
+import com.ulatina.ticoplaces.webservice.model.entity.Canton;
+import com.ulatina.ticoplaces.webservice.model.entity.Category;
+import com.ulatina.ticoplaces.webservice.model.entity.District;
 import com.ulatina.ticoplaces.webservice.model.entity.Place;
+import com.ulatina.ticoplaces.webservice.model.entity.Province;
 
 @Service
 public class PlaceServiceImpl implements IPlaceService{
@@ -27,6 +31,42 @@ public class PlaceServiceImpl implements IPlaceService{
 	public Place findById(Long id) {
 	
 		return placeDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Place save(Place place) {
+		return placeDao.save(place);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		placeDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Canton> findAllCantons() {
+		return placeDao.findAllCantons();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Province> findAllProvinces() {
+		return placeDao.findAllProvinces();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<District> findAllDistricts() {
+		return placeDao.findAllDistricts();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Category> findAllCategories() {
+		return placeDao.findAllCategories();
 	}
 
 }

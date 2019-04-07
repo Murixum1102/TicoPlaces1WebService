@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ulatina.ticoplaces.webservice.model.dao.ICantonDao;
+import com.ulatina.ticoplaces.webservice.model.dao.IProvinceDao;
 import com.ulatina.ticoplaces.webservice.model.entity.Canton;
+import com.ulatina.ticoplaces.webservice.model.entity.Province;
 
 @Service
 public class CantonServiceImpl implements ICantonService{
 
 	@Autowired
 	private ICantonDao cantonDao;
-	
+	@Autowired
+	private IProvinceDao provinceDao;
 	@Override
 	@Transactional(readOnly=true)
 	public List<Canton> findAll() {
@@ -39,6 +42,14 @@ public class CantonServiceImpl implements ICantonService{
 		cantonDao.deleteById(id);
 		
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Province> findAllProvinces() {
+		return cantonDao.findAllProvinces();
+	}
+
+	
 
 
 }

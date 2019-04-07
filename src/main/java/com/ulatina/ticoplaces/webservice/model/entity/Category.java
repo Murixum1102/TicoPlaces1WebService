@@ -33,14 +33,14 @@ public class Category implements Serializable{
 	@Column(name="Category_Name")
 	private String description;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="category", cascade=CascadeType.ALL)
+	/*@OneToMany(fetch=FetchType.LAZY, mappedBy="category", cascade=CascadeType.ALL)
 	@JsonManagedReference
-	private List<Place> places;
+	private List<Place> places;*/
 	
 	
 
 	public Category() {
-		this.places = new ArrayList<>();
+		//this.places = new ArrayList<>();
 		
 	}
 	
@@ -60,13 +60,13 @@ public class Category implements Serializable{
 		this.description = description;
 	}
 
-	public List<Place> getPlaces() {
+	/*public List<Place> getPlaces() {
 		return places;
 	}
 
 	public void setPlaces(List<Place> places) {
 		this.places = places;
-	}
+	}*/
 	
 	
 	

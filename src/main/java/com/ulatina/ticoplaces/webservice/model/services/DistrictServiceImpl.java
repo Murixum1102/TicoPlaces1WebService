@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ulatina.ticoplaces.webservice.model.dao.IDistrictDao;
+import com.ulatina.ticoplaces.webservice.model.entity.Canton;
 import com.ulatina.ticoplaces.webservice.model.entity.District;
 
 @Service
@@ -38,6 +39,13 @@ public class DistrictServiceImpl implements IDistrictService{
 		@Override
 		public void delete(Long id) {
 			districtDao.deleteById(id);
+		}
+
+		@Override
+		@Transactional(readOnly=true)
+		public List<Canton> findAllCantons() {
+			
+		 return districtDao.findAllCantons();
 		}
 
 	

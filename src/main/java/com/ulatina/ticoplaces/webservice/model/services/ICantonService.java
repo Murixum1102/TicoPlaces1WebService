@@ -14,4 +14,6 @@ public interface ICantonService {
 	public Canton save(Canton canton);
 
 	public void delete(Long id);
+	
+	public List<Province> findAllProvinces();
 }

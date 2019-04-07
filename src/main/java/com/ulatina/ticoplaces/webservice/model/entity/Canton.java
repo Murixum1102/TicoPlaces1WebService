@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,6 +38,7 @@ public class Canton implements Serializable{
 	@Column(name="Name")
 	private String name;
 	
+	@NotNull(message="No puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TBL_Province_id_Province")
 	//@JsonBackReference
