@@ -1,5 +1,7 @@
 package com.ulatina.ticoplaces.webservice.controllers;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,7 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,6 +46,8 @@ public class PlaceRestController {
 	
 	@Autowired
 	private IPlaceService placeService;
+	
+	private final Logger log = LoggerFactory.getLogger(PlaceRestController.class);
 	
 	@GetMapping("/places")
 	public List<Place> index(){
@@ -71,10 +81,37 @@ public class PlaceRestController {
 	}
 	
 	@DeleteMapping("/places/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long id) {
-		placeService.delete(id);
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		try {
+			
+			//Borrar la foto asociada al Place
+			Place place = placeService.findById(id);
+			String nombreFoto = place.getPhoto();
+			//Si la foto existe se borra al borrar el Place
+			if(nombreFoto !=null && nombreFoto.length() > 0) {
+				//se debe cambiar este path cuando se amarre al front y se haga deployment
+				Path rutaFoto = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
+				File archivoFoto = rutaFoto.toFile();
+				if(archivoFoto.exists() && archivoFoto.canRead()) {
+					archivoFoto.delete();
+				}
+			}
+			
+			placeService.delete(id);
+		}catch(DataAccessException e) {
+			//Respuesta Http del status de la operacion, error
+			response.put("mensaje", "Error when trying to delete Place.");
+			response.put("error", e.getMessage().concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		//Respuesta Http del status de la operacion
+		response.put("mensaje", "The Place was sucessfuly deleted.");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+	
 	@GetMapping("/places/provincias")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Province> findAllProvinces() {
@@ -96,6 +133,7 @@ public class PlaceRestController {
 		return placeService.findAllCategories();
 	}
 	
+	//Subir foto, upload
 	@PostMapping("places/upload")
 	public ResponseEntity<?> uploadPicture(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
@@ -106,7 +144,7 @@ public class PlaceRestController {
 			String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
 			//Ruta absoluta desde donde se van a subir las imagenes. Se debe cambiar al unir con FrontEnd
 			Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
-			
+			log.info(rutaArchivo.toString());
 			try {
 				Files.copy(archivo.getInputStream(), rutaArchivo);
 			} catch (IOException e) {
@@ -124,5 +162,29 @@ public class PlaceRestController {
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		
+	}
+	
+	//Mostrar foto en el browser
+	@GetMapping("/uploads/img/{nombreFoto:.+}")
+	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto){
+		
+		Path rutaArchivo = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
+		log.info(rutaArchivo.toString());
+		Resource recurso = null;
+		
+		try {
+			recurso = new UrlResource(rutaArchivo.toUri());
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(!recurso.exists() && !recurso.isReadable()) {
+			throw new RuntimeException( "No se pudo cargar la imagen: " + nombreFoto);
+		}
+		HttpHeaders header = new HttpHeaders();
+		header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
+		
+		return new ResponseEntity<Resource>(recurso, header, HttpStatus.OK);
 	}
 }
