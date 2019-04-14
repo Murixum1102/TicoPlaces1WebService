@@ -109,7 +109,8 @@ public class PlaceRestController {
 			try {
 				Files.copy(archivo.getInputStream(), rutaArchivo);
 			} catch (IOException e) {
-				
+				response.put("mensaje", "Error uploading picture: " + nombreArchivo);
+				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			place.setPhoto(nombreArchivo);
