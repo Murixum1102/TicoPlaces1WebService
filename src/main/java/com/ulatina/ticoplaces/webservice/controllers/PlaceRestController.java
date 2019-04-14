@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -102,7 +103,7 @@ public class PlaceRestController {
 		Place place = placeService.findById(id);
 		
 		if(!archivo.isEmpty()) {
-			String nombreArchivo = archivo.getOriginalFilename();
+			String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
 			//Ruta absoluta desde donde se van a subir las imagenes. Se debe cambiar al unir con FrontEnd
 			Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
 			
