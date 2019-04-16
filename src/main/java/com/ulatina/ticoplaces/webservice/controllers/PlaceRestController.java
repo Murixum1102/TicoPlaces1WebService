@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,18 +34,18 @@ public class PlaceRestController {
 	public List<Place> index(){
 		return placeService.findAll();
 	}
-	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/places/{id}")
 	public Place show(@PathVariable Long id) {
 		return placeService.findById(id);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/places")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Place create(@RequestBody Place place) {
 		return placeService.save(place);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/places/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Place update(@RequestBody Place place, @PathVariable Long id) {
@@ -59,27 +60,31 @@ public class PlaceRestController {
 		placeActual.setCategory(place.getCategory());
 		return placeService.save(placeActual);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/places/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		placeService.delete(id);
 	}
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/places/provincias")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Province> findAllProvinces() {
 		return placeService.findAllProvinces();
 	}
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/places/cantones")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Canton> findAllCantons() {
 		return placeService.findAllCantons();
 	}
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/places/distritos")
 	@ResponseStatus(HttpStatus.OK)
 	public List<District> findAllDistricts() {
 		return placeService.findAllDistricts();
 	}
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/places/categorias")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Category> findAllCategory() {

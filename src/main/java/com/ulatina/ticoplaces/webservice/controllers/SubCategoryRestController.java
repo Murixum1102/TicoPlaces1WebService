@@ -17,43 +17,45 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ulatina.ticoplaces.webservice.model.entity.Province;
+import com.ulatina.ticoplaces.webservice.model.entity.SubCategory;
 import com.ulatina.ticoplaces.webservice.model.services.IProvinceService;
+import com.ulatina.ticoplaces.webservice.model.services.ISubCategoryService;
+
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api")
-public class ProvinceRestController {
-
+public class SubCategoryRestController {
 	@Autowired
-	private IProvinceService provinceService;
+	private ISubCategoryService subCategoryService;
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping("/provinces")
-	public List<Province> index(){
+	@GetMapping("/subcategories")
+	public List<SubCategory> index(){
 		
-		return provinceService.findAll();
+		return subCategoryService.findAll();
 	}
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping("provinces/{id}")
-	public Province show(@PathVariable Long id) {
-		return provinceService.findById(id);
+	@GetMapping("subcategories/{id}")
+	public SubCategory show(@PathVariable Long id) {
+		return subCategoryService.findById(id);
 	}
 	@Secured({"ROLE_ADMIN"})
-	@PostMapping("/provinces")
+	@PostMapping("/subcategories")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Province create(@RequestBody Province province) {
+	public SubCategory create(@RequestBody SubCategory subCategory) {
 		
-		return provinceService.save(province);
+		return subCategoryService.save(subCategory);
 	}
 	@Secured({"ROLE_ADMIN"})
-	@PutMapping("/provinces/{id}")
-	public Province update (@RequestBody Province province, @PathVariable Long id) {
-		Province provinceActual = provinceService.findById(id);
-		provinceActual.setProvinceName(province.getProvinceName());
-		return provinceService.save(provinceActual);
+	@PutMapping("/subcategories/{id}")
+	public SubCategory update (@RequestBody SubCategory subCategory, @PathVariable Long id) {
+		SubCategory subcategoriaActual = subCategoryService.findById(id);
+		subcategoriaActual.setDescription(subCategory.getDescription());
+		return subCategoryService.save(subcategoriaActual);
 	}
 	@Secured({"ROLE_ADMIN"})
-	@DeleteMapping("/provinces/{id}")
+	@DeleteMapping("/subcategories/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		provinceService.delete(id);
+		subCategoryService.delete(id);
 	}
 }

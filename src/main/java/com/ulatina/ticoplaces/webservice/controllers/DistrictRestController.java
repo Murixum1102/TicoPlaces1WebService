@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,35 +27,38 @@ public class DistrictRestController {
 	
 	@Autowired
 	private IDistrictService districtService;
-	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/districts")
 	public List<District> index(){
 		
 		return districtService.findAll();
 	}
-	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("districts/{id}")
 	public District show(@PathVariable Long id) {
 		return districtService.findById(id);
 	}
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/districts")
 	@ResponseStatus(HttpStatus.CREATED)
 	public District create(@RequestBody District district) {
 		
 		return districtService.save(district);
 	}
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("/districts/{id}")
 	public District update (@RequestBody District district, @PathVariable Long id) {
 		District districtActual = districtService.findById(id);
 		districtActual.setDistrictName(district.getDistrictName());
 		return districtService.save(district);
 	}
-	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/districts/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		districtService.delete(id);
 	}
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/districts/cantones")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Canton> findAllCantons() {
