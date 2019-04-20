@@ -52,4 +52,24 @@ public class UserService implements IUserService,UserDetailsService{
 		return userDao.findByUsername(username);
 	}
 
+	@Override
+	public List<UserEntity> findAll() {
+		return (List<UserEntity>) userDao.findAll();
+	}
+
+	@Override
+	public UserEntity findById(Long id) {
+		return userDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public UserEntity save(UserEntity user) {
+		return userDao.save(user);
+	}
+
+	@Override
+	public void delete(Long id) {
+		userDao.deleteById(id);
+	}
+
 }

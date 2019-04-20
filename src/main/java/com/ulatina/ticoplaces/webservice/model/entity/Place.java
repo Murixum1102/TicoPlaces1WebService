@@ -59,9 +59,34 @@ public class Place implements Serializable{
 	@JoinColumn(name="TBL_Category_id_Category")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Category category;
+	
+	@Column(name="photo")
+	private String photo;
+	
+	@Column(name="history")
+	private String history;
+	
+	@Column(name="description")
+	private String description;
+	
+	public String getPhoto() {
+		return photo;
+	}
 
-	
-	
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Place() {
 		
 		
@@ -129,6 +154,14 @@ public class Place implements Serializable{
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getHistory() {
+		return history;
 	}
 	
 	

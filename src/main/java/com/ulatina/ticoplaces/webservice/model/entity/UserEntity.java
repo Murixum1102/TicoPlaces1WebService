@@ -15,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
+
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Entity
 @Table(name="tbl_user")
 public class UserEntity implements Serializable {
@@ -23,6 +26,8 @@ public class UserEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Autowired
+	//private BCryptPasswordEncoder passwordEncoder;
 	
 	@Id
 	@Column(name="id_User")
@@ -67,6 +72,9 @@ public class UserEntity implements Serializable {
 	}
 
 	public void setPassword(String password) {
+		//String passwordBcrypt = passwordEncoder.encode(this.password);
+		//System.out.println(passwordBcrypt);
+		//passwordBcrypt = password;
 		this.password = password;
 	}
 
